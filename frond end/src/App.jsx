@@ -12,19 +12,24 @@ function convertToTime(seconds) {
 
 function App() {
   const handleNext = () => {
-    // console.log("ini next");
-
     if (nomor < soal[0].questions.length - 1) {
       setNomor(nomor + 1);
       console.log(soal[0].questions.length);
-     
     }
-    
+  };
+
+  const handleBack = () => {
+    console.log(nomor);
+    if (soal[0].questions[nomor].questionNo > 1) {
+      setNomor(nomor - 1);
+      console.log(soal[0].questions.length);
+    }
+
   };
 
   const [nomor, setNomor] = useState(0);
 
-  console.log("nomor : " , nomor);
+  console.log("nomor : ", nomor);
 
   return (
     <div
@@ -68,7 +73,7 @@ function App() {
           padding: "20px",
         }}
       >
-        <h2>{soal[0].questions[0].question}</h2>
+        <h2>{soal[0].questions[nomor].question}</h2>
       </div>
 
       {/* Bagian Jawaban Pilihan Ganda */}
@@ -94,7 +99,7 @@ function App() {
                 <input type="radio" id="option1" name="answer" value="1" />
                 <label htmlFor="option1">
                   {" "}
-                  A. {soal[0].questions[0].options[0]}
+                  A. {soal[0].questions[nomor].options[0]}
                 </label>
               </td>
               <td>
@@ -102,7 +107,7 @@ function App() {
                 <input type="radio" id="option1" name="answer" value="1" />
                 <label htmlFor="option1">
                   {" "}
-                  A. {soal[0].questions[0].options[1]}
+                  A. {soal[0].questions[nomor].options[1]}
                 </label>
               </td>
             </tr>
@@ -112,7 +117,7 @@ function App() {
                 <input type="radio" id="option2" name="answer" value="2" />
                 <label htmlFor="option2">
                   {" "}
-                  B. {soal[0].questions[0].options[2]}
+                  B. {soal[0].questions[nomor].options[2]}
                 </label>
               </td>
               <td>
@@ -120,7 +125,7 @@ function App() {
                 <input type="radio" id="option1" name="answer" value="1" />
                 <label htmlFor="option1">
                   {" "}
-                  A. {soal[0].questions[0].options[3]}
+                  A. {soal[0].questions[nomor].options[3]}
                 </label>
               </td>
             </tr>
@@ -145,8 +150,8 @@ function App() {
         }}
       >
         <button
-          style={{ backgroundColor: "#555", color: "white", padding: "10px" }}
-          disabled
+          style={{ backgroundColor: "#555", color: "white", padding: "10px" }}  onClick={handleBack}
+          
         >
           &lt; Before
         </button>
