@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import "./App.css";
 // import soal from "./soal";
 import axios from "axios";
+import "../tailwind.css"
+
 
 function convertToTime(seconds) {
   const hours = Math.floor(seconds / 3600);
@@ -12,33 +14,47 @@ function convertToTime(seconds) {
 }
 
 function App() {
-  const handleNext = () => {
-
-    // conso
-    if (nomor < data[0].questions.length - 1) {
-      setNomor(nomor + 1);
-
-    }
-  };
-
-  const handleBack = () => {
-    console.log(nomor);
-    if (data[0].questions[nomor].questionNo > 1) {
-      setNomor(nomor - 1);
-
-    }
-  };
-
   const [nomor, setNomor] = useState(0);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [answer, setAnswer] = useState(null);
+  const [selectRadio, setSelectRadio] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const handleNext = () => {
+    // conso
+    if (nomor < data[0].questions.length - 1) {
+      setNomor(nomor + 1);
+    }
+
+    setAnswer((prev) => ({ ...prev, [nomor+1]: selectRadio }));
+  };
+
+  console.log(answer);
+
+  const handleBack = () => {
+    // console.log(nomor);
+    if (data[0].questions[nomor].questionNo > 1) {
+      setNomor(nomor - 1);
+    }
+  };
+  const submitAnswer = () => {};
+
+  const handleChangeRadio = (e) => {
+    setSelectRadio(e.target.value);
+    console.log("cek : ", e.target.value);
+  };
+
+
+  const showAllAnswer = () => {
+    alert("ini tampil");
+  }
 
   useEffect(() => {
     axios
       .get("http://localhost:5045/api/Quiz/getall")
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
         setLoading(false);
       })
@@ -73,7 +89,7 @@ function App() {
         }}
       >
         <div>Soal : {data != null && data[0].questions[nomor].questionNo}</div>
-        <div>Sisa Waktu: {data != null &&  convertToTime(data[0].time)}</div>
+        <div>Sisa Waktu: {data != null && convertToTime(data[0].time)}</div>
       </div>
 
       {/* Bagian Pertanyaan */}
@@ -88,7 +104,7 @@ function App() {
           padding: "20px",
         }}
       >
-        <h2>{data != null && data[0].questions[nomor].questionText }</h2>
+        <h2>{data != null && data[0].questions[nomor].questionText}</h2>
       </div>
 
       {/* Bagian Jawaban Pilihan Ganda */}
@@ -109,15 +125,27 @@ function App() {
             <tr>
               <td>
                 {" "}
-                <input type="radio" id="option1" name="answer" value="1" />
+                <input
+                  type="radio"
+                  id="option1"
+                  name="answer"
+                  value="A"
+                  onChange={handleChangeRadio}
+                />
                 <label htmlFor="option1">
                   {" "}
-                  A. {data != null &&  data[0].questions[nomor].options[0]}
+                  A. {data != null && data[0].questions[nomor].options[0]}
                 </label>
               </td>
               <td>
                 {" "}
-                <input type="radio" id="option1" name="answer" value="1" />
+                <input
+                  type="radio"
+                  id="option2"
+                  name="answer"
+                  value="B"
+                  onChange={handleChangeRadio}
+                />
                 <label htmlFor="option1">
                   {" "}
                   B. {data != null && data[0].questions[nomor].options[1]}
@@ -127,7 +155,13 @@ function App() {
             <tr>
               <td>
                 {" "}
-                <input type="radio" id="option2" name="answer" value="2" />
+                <input
+                  type="radio"
+                  id="option3"
+                  name="answer"
+                  value="C"
+                  onChange={handleChangeRadio}
+                />
                 <label htmlFor="option2">
                   {" "}
                   C. {data != null && data[0].questions[nomor].options[2]}
@@ -135,7 +169,13 @@ function App() {
               </td>
               <td>
                 {" "}
-                <input type="radio" id="option1" name="answer" value="1" />
+                <input
+                  type="radio"
+                  id="option4"
+                  name="answer"
+                  value="D"
+                  onChange={handleChangeRadio}
+                />
                 <label htmlFor="option1">
                   {" "}
                   D. {data != null && data[0].questions[nomor].options[3]}
@@ -143,7 +183,6 @@ function App() {
               </td>
             </tr>
           </table>
-
         </form>
       </div>
 
@@ -180,6 +219,8 @@ function App() {
             color: "white",
             padding: "10px",
           }}
+
+          onClick={showAllAnswer}
         >
           Tampilkan Seluruh Jawaban
         </button>
