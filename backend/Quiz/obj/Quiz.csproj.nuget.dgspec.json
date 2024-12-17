@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\nanonano\\NEW ERA\\Quiz\\backend\\Quiz\\Quiz.csproj": {}
+    "D:\\nanonano\\NEW ERA\\Quiz\\GrasfamQuiz\\backend\\Quiz\\Quiz.csproj": {}
   },
   "projects": {
-    "D:\\nanonano\\NEW ERA\\Quiz\\backend\\Quiz\\Quiz.csproj": {
+    "D:\\nanonano\\NEW ERA\\Quiz\\GrasfamQuiz\\backend\\Quiz\\Quiz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\nanonano\\NEW ERA\\Quiz\\backend\\Quiz\\Quiz.csproj",
+        "projectUniqueName": "D:\\nanonano\\NEW ERA\\Quiz\\GrasfamQuiz\\backend\\Quiz\\Quiz.csproj",
         "projectName": "Quiz",
-        "projectPath": "D:\\nanonano\\NEW ERA\\Quiz\\backend\\Quiz\\Quiz.csproj",
+        "projectPath": "D:\\nanonano\\NEW ERA\\Quiz\\GrasfamQuiz\\backend\\Quiz\\Quiz.csproj",
         "packagesPath": "C:\\Users\\PT-DIKA\\.nuget\\packages\\",
-        "outputPath": "D:\\nanonano\\NEW ERA\\Quiz\\backend\\Quiz\\obj\\",
+        "outputPath": "D:\\nanonano\\NEW ERA\\Quiz\\GrasfamQuiz\\backend\\Quiz\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PT-DIKA\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.11, )"

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import soal from "./soal";
+// import soal from "./soal";
+import axios from "axios";
 
 function convertToTime(seconds) {
   const hours = Math.floor(seconds / 3600);
@@ -12,24 +13,40 @@ function convertToTime(seconds) {
 
 function App() {
   const handleNext = () => {
-    if (nomor < soal[0].questions.length - 1) {
+
+    // conso
+    if (nomor < data[0].questions.length - 1) {
       setNomor(nomor + 1);
-      console.log(soal[0].questions.length);
+
     }
   };
 
   const handleBack = () => {
     console.log(nomor);
-    if (soal[0].questions[nomor].questionNo > 1) {
+    if (data[0].questions[nomor].questionNo > 1) {
       setNomor(nomor - 1);
-      console.log(soal[0].questions.length);
-    }
 
+    }
   };
 
   const [nomor, setNomor] = useState(0);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  console.log("nomor : ", nomor);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5045/api/Quiz/getall")
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div
@@ -55,10 +72,8 @@ function App() {
           alignItems: "center",
         }}
       >
-        <div>Soal : {soal[0].questions[nomor].questionNo}</div>
-        {/* {console.log(soal.questions[0] )} */}
-        {/* {console.log(soal[0].questions[0].options[0])}; */}
-        <div>Sisa Waktu: {convertToTime(soal[0].time)}</div>
+        <div>Soal : {data != null && data[0].questions[nomor].questionNo}</div>
+        <div>Sisa Waktu: {data != null &&  convertToTime(data[0].time)}</div>
       </div>
 
       {/* Bagian Pertanyaan */}
@@ -73,7 +88,7 @@ function App() {
           padding: "20px",
         }}
       >
-        <h2>{soal[0].questions[nomor].question}</h2>
+        <h2>{data != null && data[0].questions[nomor].questionText }</h2>
       </div>
 
       {/* Bagian Jawaban Pilihan Ganda */}
@@ -85,10 +100,8 @@ function App() {
         }}
       >
         <form>
-          {/* <div style={{ marginBottom: "10px" }}> */}
           <table
             style={{
-              // border: "1px solid black",
               borderCollapse: "collapse",
               width: "100%",
             }}
@@ -99,7 +112,7 @@ function App() {
                 <input type="radio" id="option1" name="answer" value="1" />
                 <label htmlFor="option1">
                   {" "}
-                  A. {soal[0].questions[nomor].options[0]}
+                  A. {data != null &&  data[0].questions[nomor].options[0]}
                 </label>
               </td>
               <td>
@@ -107,7 +120,7 @@ function App() {
                 <input type="radio" id="option1" name="answer" value="1" />
                 <label htmlFor="option1">
                   {" "}
-                  A. {soal[0].questions[nomor].options[1]}
+                  B. {data != null && data[0].questions[nomor].options[1]}
                 </label>
               </td>
             </tr>
@@ -117,7 +130,7 @@ function App() {
                 <input type="radio" id="option2" name="answer" value="2" />
                 <label htmlFor="option2">
                   {" "}
-                  B. {soal[0].questions[nomor].options[2]}
+                  C. {data != null && data[0].questions[nomor].options[2]}
                 </label>
               </td>
               <td>
@@ -125,16 +138,12 @@ function App() {
                 <input type="radio" id="option1" name="answer" value="1" />
                 <label htmlFor="option1">
                   {" "}
-                  A. {soal[0].questions[nomor].options[3]}
+                  D. {data != null && data[0].questions[nomor].options[3]}
                 </label>
               </td>
             </tr>
           </table>
 
-          {/* </div>
-          <div style={{ marginBottom: "10px" }}> */}
-
-          {/* </div> */}
         </form>
       </div>
 
@@ -150,8 +159,8 @@ function App() {
         }}
       >
         <button
-          style={{ backgroundColor: "#555", color: "white", padding: "10px" }}  onClick={handleBack}
-          
+          style={{ backgroundColor: "#555", color: "white", padding: "10px" }}
+          onClick={handleBack}
         >
           &lt; Before
         </button>
