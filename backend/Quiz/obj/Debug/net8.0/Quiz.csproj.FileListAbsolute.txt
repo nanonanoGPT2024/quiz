@@ -337,3 +337,7 @@ D:\nanonano\NEW ERA\Quiz\GrasfamQuiz\backend\Quiz\obj\Debug\net8.0\refint\Quiz.d
 D:\nanonano\NEW ERA\Quiz\GrasfamQuiz\backend\Quiz\obj\Debug\net8.0\Quiz.pdb
 D:\nanonano\NEW ERA\Quiz\GrasfamQuiz\backend\Quiz\obj\Debug\net8.0\Quiz.genruntimeconfig.cache
 D:\nanonano\NEW ERA\Quiz\GrasfamQuiz\backend\Quiz\obj\Debug\net8.0\ref\Quiz.dll
+D:\nanonano\NEW ERA\quiz\backend\Quiz\bin\Debug\net8.0\Quiz.staticwebassets.endpoints.json
+D:\nanonano\NEW ERA\quiz\backend\Quiz\obj\Debug\net8.0\Quiz.sourcelink.json
+D:\nanonano\NEW ERA\quiz\backend\Quiz\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+D:\nanonano\NEW ERA\quiz\backend\Quiz\obj\Debug\net8.0\staticwebassets\msbuild.Quiz.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
